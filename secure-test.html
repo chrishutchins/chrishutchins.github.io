@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Content Gating Example</title>
-    <script>
+ <script>
         const clientId = 'pt8PQIzv9ECrXxWtnKEByZhyWZjOcmuDGmZDyxswQM0n4ij83k2jkk-6LA9Ztrcr';
         const redirectUri = 'https://chrishutchins.github.io/secure-test.html';
 
@@ -39,7 +39,7 @@
             }
         }
 
-        function redirectToPatreon() {
+        function redirectToPatreonLogin() {
             window.location.href = `https://www.patreon.com/oauth2/authorize?response_type=token&client_id=${clientId}&redirect_uri=${redirectUri}`;
         }
 
@@ -49,23 +49,34 @@
 </head>
 <body>
     <h1>Supercast</h1>
-    <supercast-gate podcast-id="allthehacks">
-        <div slot="unavailable">
-            <h3>SC: Logged Out</h3>
-            <p>This content is only available to subscribers. Please subscribe to access this content.</p>
-            <!-- <button id="subscribe-button">Subscribe Now</button> -->
-            <a href="#" onclick="Supercast.startLogin()">Login Now</a>
-        </div>
+    <supercast-gate>
         <div slot="available">
             <h3>SC: Logged In</h3>
             <p>Welcome, subscriber! Here is your exclusive content.</p>
         </div>
+        <div slot="unavailable">
+            <h3>SC: Logged Out</h3>
+            <p>This content is only available to subscribers. Please subscribe to access this content.</p>
+            <!-- <button id="subscribe-button">Subscribe Now</button> -->
+            <a href="#" onclick="Supercast.startLogin()">SC Login</a>
+        </div>
+        
     </supercast-gate>
+    <supercast-gate>
+  <div slot="available">
+    Content for subscribers
+  </div>
+  <div slot="unavailable">
+    Content for non-subscribers
+    <a href="#" onclick="Supercast.startLogin()">Login Test</a>
+  </div>
+</supercast-gate>
+
     <h1>Patreon</h1>
     <div id="patreon-default-content" style="display:none;">
         <h3>Patreon: Logged Out</h3>
         <p>This content is only available to subscribers. Please subscribe to access this content.</p>
-        <button onclick="redirectToPatreon()">Subscribe Now</button>
+        <button onclick="redirectToPatreonLogin()">Login with Patreon</button>
     </div>
     <div id="patreon-subscriber-content" style="display:none;">
         <h3>Patreon: Logged Out</h3>
