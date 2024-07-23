@@ -65,4 +65,35 @@
 
     function getQueryParameter(name) {
       const urlParams = new URLSearchParams(window.location.search);
-     
+      return urlParams.get(name);
+    }
+
+    function displayError(message) {
+      const errorMessageDiv = document.getElementById('error-message');
+      errorMessageDiv.textContent = message;
+      errorMessageDiv.style.display = 'block';
+    }
+
+    (async function() {
+      const code = getQueryParameter('code');
+      if (code) {
+        try {
+          const accessToken = await fetchAccessToken(code);
+          if (accessToken) {
+            const patreonData = await fetchPatreonData(accessToken);
+            const memberships = patreonData.included;
+            if (memberships && memberships.length > 0) {
+              document.getElementById('protected-content').style.display = 'block';
+              document.getElementById('login-button').style.display = 'none';
+            } else {
+              displayError('No valid Patreon memberships found.');
+            }
+          }
+        } catch (error) {
+          displayError(`Unexpected error: ${error.message}`);
+        }
+      }
+    })();
+  </script>
+</body>
+</html>
