@@ -1,1 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Patreon Redirect</title>
+</head>
+<body>
+  <script>
+    document.addEventListener("DOMContentLoaded", async function() {
+      // Function to handle OAuth redirect
+      async function handleOAuthRedirect() {
+        const urlParams = new URLSearchParams(window.location.search);
+        const code = urlParams.get('code');
+        const state = urlParams.get('state');
+        if (code) {
+          try {
+            const response = await fetch('https://athpatreon.netlify.app/.netlify/functions/fetchAccessToken', {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json'
+              },
+              body: JSON.stringify({ code })
+            });
+            if (!response.ok) {
+              throw new Error('Failed to fetch access token');
+            }
+            const data = await response.json();
+            localStorage.setItem('patreonAccessToken', data.access_token);
+            localStorage.setItem('patreonTokenTimestamp', new Date().getTime().toString());
+            // Redirect to the original page
+            window.location.href = decodeURIComponent(state) || '/';
+          } catch (error) {
+            console.error('Error fetching access token:', error);
+          }
+        }
+      }
 
+      // Execute handleOAuthRedirect to handle the OAuth redirect
+      handleOAuthRedirect();
+    });
+  </script>
+</body>
+</html>
