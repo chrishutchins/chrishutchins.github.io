@@ -3,23 +3,55 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Content Gating Example</title>
-    <script src="https://allthehacks.supercast.com/js/embed.js" defer></script>
+    <title>Background Noise</title>
+    <style>
+        .background-noise {
+            position: relative;
+            width: 100%;
+            height: 100vh;
+            background: #1A4331;
+            opacity: 1;
+        }
+
+        .background-noise::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('https://redwood-labs.s3.amazonaws.com/8aff45e9-df5c-43d1-ab7d-b99b65435bd0');
+            opacity: 1;
+            z-index: 1;
+        }
+
+        .content {
+            position: relative;
+            z-index: 2;
+            color: white;
+            text-align: center;
+            padding: 50px;
+        }
+    </style>
+    <script src="https://allthehacks.supercast.com/js/embed.js"></script>
 </head>
 <body>
-    <h1>Supercast</h1>
-    <supercast-gate>
-        <div slot="available">
-            <h3>SC: Logged In</h3>
-            <p>Welcome, subscriber! Here is your exclusive content.</p>
+    <div class="background-noise">
+        <div class="content" id="content-placeholder">
+            
+            <h1>test</h1>
+<supercast-gate>
+  <div slot="available">
+    Content for subscribers
+  </div>
+  <div slot="unavailable">
+    Content for non-subscribers
+        <a href="#" onclick="Supercast.startLogin()">Login Test</a>
         </div>
-        <div slot="unavailable">
-            <h3>SC: Logged Out</h3>
-            <p>This content is only available to subscribers. Please subscribe to access this content.</p>
-            <!-- <button id="subscribe-button">Subscribe Now</button> -->
-            <a href="#" onclick="Supercast.startLogin()">SC Login</a>
+        </supercast-gate>
         </div>
-        
-    </supercast-gate>
+    </div>
+
+
 </body>
 </html>
