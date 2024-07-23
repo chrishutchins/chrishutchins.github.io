@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Content Gating Example</title>
+    <script src="https://allthehacks.supercast.com/js/embed.js" defer></script>
+</head>
+<body>
+    <h1>Supercast</h1>
+    <supercast-gate>
+        <div slot="available">
+            <h3>SC: Logged In</h3>
+            <p>Welcome, subscriber! Here is your exclusive content.</p>
+        </div>
+        <div slot="unavailable">
+            <h3>SC: Logged Out</h3>
+            <p>This content is only available to subscribers. Please subscribe to access this content.</p>
+            <!-- <button id="subscribe-button">Subscribe Now</button> -->
+            <a href="#" onclick="Supercast.startLogin()">SC Login</a>
+        </div>
+        
+    </supercast-gate>
+</body>
+</html>
