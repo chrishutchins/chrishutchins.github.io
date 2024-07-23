@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Patreon Gate Example</title>
+    <script>
+        const clientId = 'YOUR_CLIENT_ID';
+        const redirectUri = 'YOUR_REDIRECT_URI';
+
+        function checkPatreonAuth() {
+            const hash = window.location.hash.substr(1);
+            const result = hash.split('&').reduce((res, item) => {
+                const parts = item.split('=');
+                res[parts[0]] = parts[1];
+                return res;
+            }, {});
+
+            if (result.access_token) {
+                fetch('https://www.patreon.com/api/oauth2/v2/identity?include=memberships', {
+                    headers: {
+                        'Authorization': `Bearer ${result.access_token}`
+                    }
+                })
+                .then(response => response.json())
+                .then(data => {
+                    const isMember = data.included && data.included.some(incl => incl.type === 'member');
+                    if (isMember) {
+                        document.getElementById('subscriber-content').style.display = 'block';
+                        document.getElementById('default-content').style.display = 'none';
+                    } else {
+                        document.getElementById('default-content').style.display = 'block';
+                        document.getElementById('subscriber-content').style.display = 'none';
+                    }
+                });
+            } else {
+                window.location.href = `https://www.patreon.com/oauth2/authorize?response_type=token&client_id=${clientId}&redirect_uri=${redirectUri}`;
+            }
+        }
+
+        window.onload = checkPatreonAuth;
+    </script>
+    <script src="https://allthehacks.supercast.com/js/embed.js" defer></script>
+</head>
+<body>
+    <supercast-gate podcast-id="allthehacks">
+        <div slot="default-content">
+            <p>This content is only available to subscribers. Please subscribe to access this content.</p>
+            <button id="subscribe-button">Subscribe Now</button>
+            <a href="#" onclick="Supercast.startLogin()">Login Now</a>
+        </div>
+        <div slot="subscriber-content">
+            <p>Welcome, subscriber! Here is your exclusive content.</p>
+        </div>
+    </supercast-gate>
+
+    <div id="default-content">
+        <p>This content is only available to subscribers. Please subscribe to access this content.</p>
+        <button onclick="window.location.href='https://www.patreon.com/oauth2/authorize?response_type=token&client_id=YOUR_CLIENT_ID&redirect_uri=YOUR_REDIRECT_URI'">Subscribe Now</button>
+    </div>
+    <div id="subscriber-content" style="display:none;">
+        <p>Welcome, subscriber! Here is your exclusive content.</p>
+    </div>
+</body>
+</html>
