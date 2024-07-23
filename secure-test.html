@@ -34,6 +34,8 @@
                     }
                 });
             } else {
+                document.getElementById('patreon-default-content').style.display = 'block';
+                document.getElementById('patreon-subscriber-content').style.display = 'none';
                 window.location.href = `https://www.patreon.com/oauth2/authorize?response_type=token&client_id=${clientId}&redirect_uri=${redirectUri}`;
             }
         }
@@ -54,7 +56,7 @@
         </div>
     </supercast-gate>
 
-    <div id="patreon-default-content">
+    <div id="patreon-default-content" style="display:none;">
         <p>This content is only available to subscribers. Please subscribe to access this content.</p>
         <button onclick="window.location.href='https://www.patreon.com/oauth2/authorize?response_type=token&client_id=pt8PQIzv9ECrXxWtnKEByZhyWZjOcmuDGmZDyxswQM0n4ij83k2jkk-6LA9Ztrcr&redirect_uri=https://chrishutchins.github.io/secure-test.html'">Subscribe Now</button>
     </div>
