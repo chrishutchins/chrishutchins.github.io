@@ -1,8 +1,6 @@
 const axios = require('axios');
 
 exports.handler = async (event, context) => {
-  const { accessToken } = JSON.parse(event.body);
-
   if (event.httpMethod === 'OPTIONS') {
     return {
       statusCode: 200,
@@ -11,6 +9,20 @@ exports.handler = async (event, context) => {
         'Access-Control-Allow-Headers': 'Content-Type'
       },
       body: ''
+    };
+  }
+
+  let accessToken;
+  try {
+    accessToken = JSON.parse(event.body).accessToken;
+  } catch (error) {
+    return {
+      statusCode: 400,
+      headers: {
+        'Access-Control-Allow-Origin': '*',
+        'Access-Control-Allow-Headers': 'Content-Type'
+      },
+      body: JSON.stringify({ error: 'Invalid request body' })
     };
   }
 
