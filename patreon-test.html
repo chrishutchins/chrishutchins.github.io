@@ -4,55 +4,100 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Content Gating Example</title>
-    <script>
-        const clientId = 'pt8PQIzv9ECrXxWtnKEByZhyWZjOcmuDGmZDyxswQM0n4ij83k2jkk-6LA9Ztrcr';
+   <script>
+    const clientId = '4IQqZw41ili79TPjom799Kk4-j4jJcfsonRbAYErvnhAkutEr6a16ELxWSeZiKrK';
         const redirectUri = 'https://chrishutchins.github.io/patreon-test.html';
 
-        function checkPatreonAuth() {
-            const hash = window.location.hash.substr(1);
-            const result = hash.split('&').reduce((res, item) => {
-                const parts = item.split('=');
-                res[parts[0]] = parts[1];
-                return res;
-            }, {});
+        
+        document.getElementById('login-button').addEventListener('click', () => {
+            const authUrl = `https://www.patreon.com/oauth2/authorize?response_type=code&client_id=${clientId}&redirect_uri=${encodeURIComponent(redirectUri)}&scope=identity`;
+            window.location.href = authUrl;
+        });
 
-            if (result.access_token) {
-                fetch('https://www.patreon.com/api/oauth2/v2/identity?include=memberships', {
+        function getQueryParam(param) {
+            const urlParams = new URLSearchParams(window.location.search);
+            return urlParams.get(param);
+        }
+
+        async function exchangeCodeForToken(code) {
+            try {
+                const response = await fetch('https://www.patreon.com/api/oauth2/token', {
+                    method: 'POST',
                     headers: {
-                        'Authorization': `Bearer ${result.access_token}`
-                    }
-                })
-                .then(response => response.json())
-                .then(data => {
-                    const isMember = data.included && data.included.some(incl => incl.type === 'member');
-                    if (isMember) {
-                        document.getElementById('patreon-subscriber-content').style.display = 'block';
-                        document.getElementById('patreon-default-content').style.display = 'none';
-                    } else {
-                        document.getElementById('patreon-default-content').style.display = 'block';
-                        document.getElementById('patreon-subscriber-content').style.display = 'none';
-                    }
+                        'Content-Type': 'application/x-www-form-urlencoded',
+                    },
+                    body: new URLSearchParams({
+                        grant_type: 'authorization_code',
+                        code: code,
+                        client_id: clientId,
+                        client_secret: 'pNIdyTNWbBXZ3vOq05ErfNW9ARPt11FIlaQHbrDvc6ZYYX8-cy_eW3UvbBsy-xsd',
+                        redirect_uri: redirectUri,
+                    }),
                 });
-            } else {
-                document.getElementById('patreon-default-content').style.display = 'block';
-                document.getElementById('patreon-subscriber-content').style.display = 'none';
+
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+
+                const data = await response.json();
+                console.log('Token exchange successful:', data);
+                return data.access_token;
+            } catch (error) {
+                console.error('Error exchanging code for token:', error);
             }
         }
 
-        function redirectToPatreonLogin() {
-            window.location.href = `https://www.patreon.com/oauth2/authorize?response_type=token&client_id=${clientId}&redirect_uri=${redirectUri}`;
+        async function getUserInfo(token) {
+            try {
+                const response = await fetch('https://www.patreon.com/api/oauth2/v2/identity', {
+                    headers: {
+                        'Authorization': `Bearer ${token}`,
+                    },
+                });
+
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+
+                const data = await response.json();
+                console.log('User info retrieved:', data);
+                return data;
+            } catch (error) {
+                console.error('Error fetching user info:', error);
+            }
         }
 
-        window.onload = checkPatreonAuth;
-    </script>
+        (async () => {
+            const code = getQueryParam('code');
+            if (code) {
+                try {
+                    const token = await exchangeCodeForToken(code);
+                    if (token) {
+                        const userInfo = await getUserInfo(token);
+                        if (userInfo) {
+                            document.getElementById('content-not-authenticated').style.display = 'none';
+                            document.getElementById('content-authenticated').style.display = 'block';
+                        } else {
+                            console.error('No user info retrieved.');
+                        }
+                    } else {
+                        console.error('No token retrieved.');
+                    }
+                } catch (error) {
+                    console.error('Error during OAuth process:', error);
+                }
+            }
+        })();
+
+</script>
 </head>
 <body>
     <h1>Patreon</h1>
-    <div id="patreon-default-content" style="display:none;">
-        <h3>Patreon: Logged Out</h3>
-        <p>This content is only available to subscribers. Please log in to access this content.</p>
-        <button onclick="redirectToPatreonLogin()">Login with Patreon</button>
-    </div>
-    <div id="patreon-subscriber-content" style="display:none;">
-        <h3>Patreon: Logged In</h3>
-        <p>Welcome, subscriber! Here is
+    <div id="content-not-authenticated">
+<p>Please log in with Patreon to view this content.</p>
+<button id="login-button">Log in with Patreon</button></div>
+<div id="content-authenticated" style="display: none;">
+<p>Welcome, patron! Here is your exclusive content:</p>
+<!-- Your gated content goes here --></div>
+</body>
+</html>
