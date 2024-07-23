@@ -25,18 +25,12 @@
 
     async function fetchAccessToken(code) {
       try {
-        const response = await fetch('https://www.patreon.com/api/oauth2/token', {
+        const response = await fetch('https://athpatreon.netlify.app/.netlify/functions/fetchAccessToken', {
           method: 'POST',
           headers: {
-            'Content-Type': 'application/x-www-form-urlencoded'
+            'Content-Type': 'application/json'
           },
-          body: new URLSearchParams({
-            'grant_type': 'authorization_code',
-            'code': code,
-            'client_id': clientId,
-            'client_secret': '2yKYc3-J8tvlgBkajXqUDk3o-3RfZEI_DhJ3H31QCgKfIZBX_g1HT00Rj_XOeLlp',
-            'redirect_uri': redirectUri
-          })
+          body: JSON.stringify({ code })
         });
         if (!response.ok) {
           const errorDetail = await response.text();
@@ -51,10 +45,12 @@
 
     async function fetchPatreonData(accessToken) {
       try {
-        const response = await fetch('https://www.patreon.com/api/oauth2/v2/identity?include=memberships&fields%5Buser%5D=full_name,vanity&fields%5Bmember%5D=currently_entitled_amount_cents', {
+        const response = await fetch('https://athpatreon.netlify.app/.netlify/functions/fetchPatreonData', {
+          method: 'POST',
           headers: {
-            'Authorization': `Bearer ${accessToken}`
-          }
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({ accessToken })
         });
         if (!response.ok) {
           const errorDetail = await response.text();
@@ -99,7 +95,5 @@
       }
     })();
   </script>
-    <h1>Unprotected Content</h1>
-
 </body>
 </html>
