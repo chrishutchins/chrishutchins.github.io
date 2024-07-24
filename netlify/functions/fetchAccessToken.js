@@ -3,7 +3,7 @@ const axios = require('axios');
 exports.handler = async (event, context) => {
   const clientId = 'pt8PQIzv9ECrXxWtnKEByZhyWZjOcmuDGmZDyxswQM0n4ij83k2jkk-6LA9Ztrcr';
   const clientSecret = '2yKYc3-J8tvlgBkajXqUDk3o-3RfZEI_DhJ3H31QCgKfIZBX_g1HT00Rj_XOeLlp';
-  const redirectUri = 'https://chrishutchins.github.io/patreon-redirect.html';
+  const redirectUri = 'https://www.allthehacks.com/p/patreon-redirect/';
 
   if (event.httpMethod === 'OPTIONS') {
     return {
