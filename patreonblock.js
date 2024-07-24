@@ -13,7 +13,7 @@ document.addEventListener("DOMContentLoaded", function() {
   async function isAuthenticatedWithPatreon() {
     const accessToken = localStorage.getItem('patreonAccessToken');
     const tokenTimestamp = localStorage.getItem('patreonTokenTimestamp');
-    
+
     console.log('Retrieved Access Token:', accessToken);
     console.log('Retrieved Token Timestamp:', tokenTimestamp);
 
