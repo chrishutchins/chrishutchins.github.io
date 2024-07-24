@@ -80,7 +80,12 @@ document.addEventListener("DOMContentLoaded", function() {
         console.log('User not authenticated, showing login button.');
 
         // Add event listener to the login button
-        document.getElementById('login-button').addEventListener('click', startPatreonLogin);
+        const loginButton = document.getElementById('login-button');
+        if (loginButton) {
+          loginButton.addEventListener('click', startPatreonLogin);
+        } else {
+          console.error('Login button not found.');
+        }
       }
     } else {
       console.error('Transcript element not found');
