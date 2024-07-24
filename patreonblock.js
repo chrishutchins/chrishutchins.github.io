@@ -1,6 +1,6 @@
 document.addEventListener("DOMContentLoaded", function() {
   const clientId = 'pt8PQIzv9ECrXxWtnKEByZhyWZjOcmuDGmZDyxswQM0n4ij83k2jkk-6LA9Ztrcr';
-  const redirectUri = 'https://chrishutchins.github.io/patreon-redirect.html';
+  const redirectUri = 'https://www.allthehacks.com/p/patreon-redirect/';
   const scopes = 'identity identity.memberships';
   const nonSubscriberContent = `
     <p>This content is for subscribers only.</p>
@@ -16,6 +16,8 @@ document.addEventListener("DOMContentLoaded", function() {
 
     console.log('Retrieved Access Token:', accessToken);
     console.log('Retrieved Token Timestamp:', tokenTimestamp);
+    alert('Retrieved Access Token: ' + accessToken);
+    alert('Retrieved Token Timestamp: ' + tokenTimestamp);
 
     if (!accessToken || !tokenTimestamp) {
       return false;
@@ -29,6 +31,7 @@ document.addEventListener("DOMContentLoaded", function() {
       localStorage.removeItem('patreonAccessToken');
       localStorage.removeItem('patreonTokenTimestamp');
       console.log('Token expired, removed from storage.');
+      alert('Token expired, removed from storage.');
       return false;
     }
 
@@ -45,10 +48,12 @@ document.addEventListener("DOMContentLoaded", function() {
       }
       const data = await response.json();
       console.log('Fetched Patreon Data:', data);
+      alert('Fetched Patreon Data: ' + JSON.stringify(data));
       const memberships = data.included;
       return memberships && memberships.length > 0;
     } catch (error) {
       console.error('Error fetching Patreon data:', error);
+      alert('Error fetching Patreon data: ' + error);
       return false;
     }
   }
@@ -62,6 +67,7 @@ document.addEventListener("DOMContentLoaded", function() {
         // User is authenticated, show the original content
         transcript.style.display = 'block';
         console.log('User authenticated, showing content.');
+        alert('User authenticated, showing content.');
       } else {
         // Store original content
         var originalContent = transcript.innerHTML;
@@ -78,6 +84,7 @@ document.addEventListener("DOMContentLoaded", function() {
         transcript.style.display = 'none'; // Hide the original content
         transcript.parentNode.insertBefore(patreonGate, transcript);
         console.log('User not authenticated, showing login button.');
+        alert('User not authenticated, showing login button.');
 
         // Add event listener to the login button
         const loginButton = document.getElementById('login-button');
@@ -85,10 +92,12 @@ document.addEventListener("DOMContentLoaded", function() {
           loginButton.addEventListener('click', startPatreonLogin);
         } else {
           console.error('Login button not found.');
+          alert('Login button not found.');
         }
       }
     } else {
       console.error('Transcript element not found');
+      alert('Transcript element not found.');
     }
   }
 
@@ -97,6 +106,7 @@ document.addEventListener("DOMContentLoaded", function() {
     const currentPage = window.location.href;
     const patreonAuthUrl = `https://www.patreon.com/oauth2/authorize?response_type=code&client_id=${clientId}&redirect_uri=${redirectUri}&scope=${scopes}&state=${encodeURIComponent(currentPage)}`;
     console.log('Redirecting to Patreon login:', patreonAuthUrl);
+    alert('Redirecting to Patreon login: ' + patreonAuthUrl);
     window.location.href = patreonAuthUrl;
   }
 
@@ -108,6 +118,8 @@ document.addEventListener("DOMContentLoaded", function() {
 
     console.log('OAuth Code:', code);
     console.log('State (original URL):', state);
+    alert('OAuth Code: ' + code);
+    alert('State (original URL): ' + state);
 
     if (code) {
       try {
@@ -126,6 +138,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
         const data = await response.json();
         console.log('Access Token Data:', data);
+        alert('Access Token Data: ' + JSON.stringify(data));
 
         localStorage.setItem('patreonAccessToken', data.access_token);
         localStorage.setItem('patreonTokenTimestamp', new Date().getTime().toString());
@@ -133,22 +146,27 @@ document.addEventListener("DOMContentLoaded", function() {
         // Verify storage before redirecting
         console.log('Stored Access Token:', localStorage.getItem('patreonAccessToken'));
         console.log('Stored Token Timestamp:', localStorage.getItem('patreonTokenTimestamp'));
+        alert('Stored Access Token: ' + localStorage.getItem('patreonAccessToken'));
+        alert('Stored Token Timestamp: ' + localStorage.getItem('patreonTokenTimestamp'));
 
         // Redirect to the original page
         const redirectTo = decodeURIComponent(state) || '/';
         console.log('Redirecting to:', redirectTo);
+        alert('Redirecting to: ' + redirectTo);
         window.location.href = redirectTo;
 
       } catch (error) {
         console.error('Error fetching access token:', error);
+        alert('Error fetching access token: ' + error);
       }
     } else {
       console.error('No OAuth code found in URL');
+      alert('No OAuth code found in URL');
     }
   }
 
   // Check if this is the redirect page
-  if (window.location.pathname === '/patreon-redirect.html') {
+  if (window.location.pathname === '/p/patreon-redirect/') {
     handleOAuthRedirect();
   } else {
     gateContent();
