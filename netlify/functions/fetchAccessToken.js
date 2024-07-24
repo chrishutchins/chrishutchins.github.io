@@ -8,6 +8,11 @@ exports.handler = async (event, context) => {
     const redirectUri = 'https://www.allthehacks.com/p/patreon-redirect/';
 
     console.log('Code received:', code);
+    console.log('Client Secret:', clientSecret ? 'Retrieved successfully' : 'Not found');
+    
+    if (!clientSecret) {
+      throw new Error('Client Secret not found in environment variables');
+    }
 
     const response = await axios.post('https://www.patreon.com/api/oauth2/token', new URLSearchParams({
       'grant_type': 'authorization_code',
