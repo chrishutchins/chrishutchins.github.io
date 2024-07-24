@@ -9,14 +9,6 @@ document.addEventListener("DOMContentLoaded", function() {
 
   const TOKEN_EXPIRY_DAYS = 30; // Set token expiry to 30 days
 
-  // Simulate token expiry for testing purposes
-  const simulateExpiry = false; // Set to true to simulate expiry
-  if (simulateExpiry) {
-    const fakePastDate = new Date();
-    fakePastDate.setDate(fakePastDate.getDate() - 31); // Set date to 31 days in the past
-    localStorage.setItem('patreonTokenTimestamp', fakePastDate.getTime().toString());
-  }
-
   // Function to check if user is authenticated with Patreon
   async function isAuthenticatedWithPatreon() {
     const accessToken = localStorage.getItem('patreonAccessToken');
@@ -36,6 +28,7 @@ document.addEventListener("DOMContentLoaded", function() {
     if (tokenAge > TOKEN_EXPIRY_DAYS * 24 * 60 * 60 * 1000) {
       localStorage.removeItem('patreonAccessToken');
       localStorage.removeItem('patreonTokenTimestamp');
+      console.log('Token expired, removed from storage.');
       return false;
     }
 
@@ -51,6 +44,7 @@ document.addEventListener("DOMContentLoaded", function() {
         throw new Error('Failed to fetch Patreon data');
       }
       const data = await response.json();
+      console.log('Fetched Patreon Data:', data);
       const memberships = data.included;
       return memberships && memberships.length > 0;
     } catch (error) {
@@ -67,6 +61,7 @@ document.addEventListener("DOMContentLoaded", function() {
       if (isAuthenticated) {
         // User is authenticated, show the original content
         transcript.style.display = 'block';
+        console.log('User authenticated, showing content.');
       } else {
         // Store original content
         var originalContent = transcript.innerHTML;
@@ -82,6 +77,7 @@ document.addEventListener("DOMContentLoaded", function() {
         // Replace the original content with the patreon-gate element
         transcript.style.display = 'none'; // Hide the original content
         transcript.parentNode.insertBefore(patreonGate, transcript);
+        console.log('User not authenticated, showing login button.');
 
         // Add event listener to the login button
         document.getElementById('login-button').addEventListener('click', startPatreonLogin);
@@ -95,6 +91,7 @@ document.addEventListener("DOMContentLoaded", function() {
   function startPatreonLogin() {
     const currentPage = window.location.href;
     const patreonAuthUrl = `https://www.patreon.com/oauth2/authorize?response_type=code&client_id=${clientId}&redirect_uri=${redirectUri}&scope=${scopes}&state=${encodeURIComponent(currentPage)}`;
+    console.log('Redirecting to Patreon login:', patreonAuthUrl);
     window.location.href = patreonAuthUrl;
   }
 
