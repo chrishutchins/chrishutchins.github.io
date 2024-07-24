@@ -22,6 +22,9 @@ document.addEventListener("DOMContentLoaded", function() {
     const accessToken = localStorage.getItem('patreonAccessToken');
     const tokenTimestamp = localStorage.getItem('patreonTokenTimestamp');
     
+    console.log('Retrieved Access Token:', accessToken);
+    console.log('Retrieved Token Timestamp:', tokenTimestamp);
+
     if (!accessToken || !tokenTimestamp) {
       return false;
     }
@@ -100,6 +103,10 @@ document.addEventListener("DOMContentLoaded", function() {
     const urlParams = new URLSearchParams(window.location.search);
     const code = urlParams.get('code');
     const state = urlParams.get('state');
+
+    console.log('OAuth Code:', code);
+    console.log('State (original URL):', state);
+
     if (code) {
       try {
         const response = await fetch('https://athpatreon.netlify.app/.netlify/functions/fetchAccessToken', {
@@ -109,20 +116,39 @@ document.addEventListener("DOMContentLoaded", function() {
           },
           body: JSON.stringify({ code })
         });
+
         if (!response.ok) {
-          throw new Error('Failed to fetch access token');
+          const errorText = await response.text();
+          throw new Error(`Failed to fetch access token: ${errorText}`);
         }
+
         const data = await response.json();
+        console.log('Access Token Data:', data);
+
         localStorage.setItem('patreonAccessToken', data.access_token);
         localStorage.setItem('patreonTokenTimestamp', new Date().getTime().toString());
+
+        // Verify storage before redirecting
+        console.log('Stored Access Token:', localStorage.getItem('patreonAccessToken'));
+        console.log('Stored Token Timestamp:', localStorage.getItem('patreonTokenTimestamp'));
+
         // Redirect to the original page
-        window.location.href = decodeURIComponent(state) || redirectUri.split('?')[0];
+        const redirectTo = decodeURIComponent(state) || '/';
+        console.log('Redirecting to:', redirectTo);
+        window.location.href = redirectTo;
+
       } catch (error) {
         console.error('Error fetching access token:', error);
       }
+    } else {
+      console.error('No OAuth code found in URL');
     }
   }
 
-  // Execute handleOAuthRedirect to handle the OAuth redirect
-  handleOAuthRedirect().then(gateContent);
+  // Check if this is the redirect page
+  if (window.location.pathname === '/patreon-redirect.html') {
+    handleOAuthRedirect();
+  } else {
+    gateContent();
+  }
 });
