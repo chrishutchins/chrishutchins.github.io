@@ -92,7 +92,7 @@
     padding-top: 0px !important;
 }
 
-.testimonial .testimonial-image {
+.testimonial .rounded-circle {
     border-radius: 0;
 }
 
@@ -691,7 +691,7 @@ img.iearth {
 
 /* Tablet and Phone */
 @media screen and (max-width: 992px) {
-    .testimonial .testimonial-image {
+    .testimonial .rounded-circle {
         border-radius: 100%;
     }
 
