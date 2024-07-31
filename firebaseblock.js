@@ -84,6 +84,28 @@
             }
         }
 
+        async function checkAuthenticationAndShowContent() {
+            const isAuthenticated = await isAuthenticatedWithFirebase();
+            const memberContent = document.getElementById('member-content');
+            const loginLink = document.getElementById('login-link');
+
+            if (isAuthenticated) {
+                if (memberContent) {
+                    memberContent.style.display = 'block';
+                }
+                if (loginLink) {
+                    loginLink.style.display = 'none';
+                }
+            } else {
+                if (memberContent) {
+                    memberContent.style.display = 'none';
+                }
+                if (loginLink) {
+                    loginLink.addEventListener('click', startFirebaseLogin);
+                }
+            }
+        }
+
         window.addEventListener('load', async () => {
             const urlParams = new URLSearchParams(window.location.search);
             if (auth.isSignInWithEmailLink(window.location.href)) {
@@ -101,4 +123,5 @@
 
             // Gate content based on authentication
             gateContent();
+            checkAuthenticationAndShowContent();
         });
