@@ -1,0 +1,744 @@
+.blog-post .content-author {
+    display: none !important;
+}
+
+.recent-blog-posts-section .card-body > div:first-of-type {
+    display: none !important;
+}
+
+.blog-post .block-post img.w-100 {
+    display: none;
+}
+
+.ck-home-email .formkit-header {
+    display: none !important; 
+}
+
+.testimonial-content {
+    max-width: 500px !important;
+    position: absolute !important; /* changed to static in mobile */
+    bottom: 50px !important;
+}
+
+/* mobilefix */
+
+.ck-home-email {
+    width: 700px;
+    padding-top: 15px;
+    padding-bottom: 0px;
+
+}
+
+/* next 2 changed on mobile*/
+.hosts-section .col-md-3 {
+    flex: 0 0 43%;
+    max-width: 43%;
+    height: auto;
+
+}
+.hosts-section .col-md-9 {
+    flex: 0 0 57%;
+    max-width: 57%;
+}
+
+.custom-content-1-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url('https://redwood-labs.s3.amazonaws.com/8aff45e9-df5c-43d1-ab7d-b99b65435bd0'); /* Replace with your pattern image URL */
+    opacity: 1; /* Adjust opacity to blend the noise */
+    z-index: 0;
+}
+
+.hosts-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url('https://redwood-labs.s3.amazonaws.com/8aff45e9-df5c-43d1-ab7d-b99b65435bd0'); /* Replace with your pattern image URL */
+    opacity: 1; /* Adjust opacity to blend the noise */
+    z-index: 0;
+}
+
+.ck-home-email form {
+    background: none !important;
+}
+
+.hosts-section .container {
+    max-width: 85% !important;
+}
+
+.hosts-section img {
+    max-height: 450px;
+    width: auto !important;
+    float: right;
+}
+
+.hosts-section .mb-4 {
+    margin-bottom: 0 !important;
+}
+
+.hosts-section .mb-3 {
+    margin-bottom: 0 !important;
+}
+
+
+.hosts-section {
+    padding-top: 0px !important;
+}
+
+.testimonial .testimonial-image {
+    border-radius: 0;
+}
+
+.testimonial-content .person {
+    pointer-events: none;
+    cursor: default;
+    text-decoration: noneck;
+    color: inherit
+}
+
+.testimonial-content .heading:hover>a {
+    color: white !important; /* Keep color the same on hover */
+}
+
+.testimonial-content .mb-2 {
+    color: #BAC7C1 !important;
+}
+
+/* Unknown */
+.p-4 {display: none; visibility: hidden;}
+
+/* Home Page */
+
+
+/* Footer */
+.footer-top .heading {
+    display: none;
+}
+
+/* Header */
+
+.mbadge {
+    letter-spacing: 1px;
+    background-color: #5FFF5A; /* Your choice of color F6FAF7 */
+    color: #1A4331; /* Badge text color */
+    padding: 5px 10px;
+    border-radius: 25px;
+    font-size: 0.8em; /* Adjust based on your design */
+    width: 200px;
+    margin-left: auto;
+    margin-right: auto;
+    font-weight: 500;
+    margin-bottom: 12px;
+    border: 1px solid rgba(26,67,49,0.15);
+}
+
+#header-hero #c-text #homepage-header-title {
+    line-height: 1.1 !important;
+}
+
+#header-hero #c-text {
+    /* max-width: 70% !important; */
+}
+
+#header-hero #header-content-wrapper {
+    padding-top: 0px;
+    padding-bottom: 30px;
+}
+
+#header-content-wrapper #c-text .btn.btn-styled.btn-base-1.btn-icon-left.btn-shadow.btn-xl {
+display: none;
+}
+
+#homepage-header-description {
+    font-size: 16px;
+    font-weight: 400 !important;
+    margin-top: 24px;
+}
+
+.custom-content-2-section {
+    margin-top: 0;
+    padding-top: 0px;
+    padding-bottom: 0px;
+}
+
+.podcast-subscribe-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    padding: 0px;
+    max-width: 600px;
+    margin: 10px auto;
+    font-family: "Inter";
+    flex-wrap: wrap; /* Allow buttons to wrap to the next line */
+}
+
+.podcast-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+    font-size: 14px;
+    text-decoration: none;
+    color: #000;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+    border: 1px solid #F2F2F2;
+    background-color: #fff;
+    vertical-align: middle;
+}
+
+.podcast-button:hover {
+    background-color: #F2F2F2; /* White background on hover */
+    color: #000; /* Text color changes on hover */
+}
+
+.podcast-dropdown {
+    position: relative;
+    display: inline-flex;
+    /* Using transparent borders to create an invisible hit area */
+    border-bottom: 20px solid transparent;
+    margin-bottom: -20px;
+    font-size: 14px;
+}
+
+.podcast-dropdown-content {
+    display: none;
+    position: absolute;
+    left: 0;
+    /* Slightly increasing the gap while ensuring functionality */
+    top: 45px; /* Adjust this value for visual preference */
+    background-color: #fff;
+    min-width: 170px;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    z-index: 1;
+}
+
+.podcast-dropdown:hover .podcast-dropdown-content {
+    display: block;
+
+}
+
+.podcast-button, .podcast-dropdown-content a {
+    text-decoration: none !important;
+}
+
+.podcast-button:hover, .podcast-dropdown-content a:hover {
+    text-decoration: none !important;
+}
+
+.podcast-dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    border-bottom: none;
+    white-space: nowrap; /* Prevent text from wrapping */
+        display: flex;
+    align-items: center;
+    /* Add any additional styling for spacing, etc., as needed */
+
+}
+
+.podcast-dropdown-content a:hover {
+    background-color: #F2F2F2; /* Light gray background on hover */
+    color: #000; /* Text color changes to black */
+}
+
+.podcast-dropdown-content a:last-child {
+    border-bottom: none;
+    }
+
+.podcast-button img, .podcast-dropdown-content a img {
+    margin-right: 10px; /* Space between icon and text */
+    vertical-align: middle; /* Align icon with text */
+    width: 20px; /* Adjust as needed */
+    height: 20px; /* Adjust as needed */
+    margin-right: 5px;
+}
+
+/* Featured Reviews */
+
+.featured-reviews-section .section-title {
+    display: none;
+}
+.lead.line-height-1_8.strong-300 {
+    display: none;
+}
+.featured-reviews-section a {
+    color: #1A4331;
+}
+.featured-reviews-section .btn-styled {
+    display: none;
+}
+.featured-reviews-section .strong-500 {
+    font-weight: 500 !important;
+    margin-top: 10px;
+    color: #1A4331;
+}
+
+.featured-reviews-section .mt-3 {
+    margin-top: 0px !important; 
+}
+.featured-reviews-section .heading-xs {
+    color: #808080;
+}
+.featured-reviews-section {
+    border: none !important;
+    background-color: #fff;
+    padding-top: 0px;
+    padding-bottom: 70px;
+}
+
+.swiper-button {
+    background-color: #fff !important;
+    color: #000 !important;
+    border: 1px solid #F2F2F2 !important;
+}
+
+.swiper-button-next.swiper-button-disabled, .swiper-button-prev.swiper-button-disabled {
+    border: 1px solid #F2F2F2;
+    color: #000;
+    background-color: #fff;
+}
+
+
+
+/* Video */
+
+.custom-content-1-section {
+    /* margin-top: 40px; Replace with video in */
+    padding-top: 0px;
+    padding-bottom: 0px; /* was 30px */
+}
+
+img.ipig {
+    position: absolute;
+    top: -100px;
+    z-index: 10;
+    left: -90px;
+}
+
+img.iearth {
+    position: absolute;
+    z-index: 10;
+    right: -230px;
+    bottom: -80px;
+    opacity: 0.5 !important;
+
+}
+
+.home-trailer-box {
+    background-color: #8DA198;    /* Black background color */
+    border-top: 3px solid #8DA198;    /* 2px border on the top */
+    border-right: 3px solid #8DA198;  /* 2px border on the right */
+    border-left: 3px solid #8DA198;   /* 2px border on the left */
+    border-bottom: 3px solid #8DA198;/* 20px border on the bottom */
+    border-radius: 15px;           /* Rounded corners */
+    overflow: hidden;              /* Ensures the content respects border-radius */
+    transform: scale(0.9);        /* Scale down to 85% of its original size */
+    transform-origin: center;      /* Ensures the scaling is centered */
+    margin-top: -100px;
+}
+
+/* Styling for the iframe container */
+.embed-container {
+    position: relative;
+    padding-bottom: 56.25%; /* 16:9 aspect ratio */
+    height: 0;
+    overflow: hidden;
+    max-width: 100%;
+    border-radius: 15px; /* Apply border-radius to the iframe container */
+}
+
+.embed-container iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 15px; /* Apply border-radius to the iframe itself */
+}
+
+/* Email */
+
+.convertkit-button {
+  background-color: #000 !important;
+  border: none !important;
+  border-radius: 0.5rem !important;
+  color: #fff !important;
+  padding: 0.75rem 1rem 0.75rem 2.75rem;
+  text-decoration: none !important;
+}
+
+.convertkit-button:hover {
+  background-color: #ddd !important;
+  color: #000 !important;
+}
+
+.convertkit-button:focus {
+  background-color: #ddd !important;
+  border-color: #b0b8be !important;
+  box-shadow: none !important;
+}
+
+.ck-home-email .formkit-subheader h2 strong {
+    font-weight: 300;
+    font-size: 58px; /* 1.8em; */
+    line-height: 1;
+}
+
+.ck-home-email .formkit-submit {
+    font-weight: 600 !important;
+}
+
+.ck-home-email .formkit-subheader p {
+    color: #BAC7C1 !important;
+    font-size: 22px !important;
+    max-width: 450px !important; /* set to auto on mobile */
+    margin: auto !important;
+}
+
+.ck-home-email .formkit-fields {
+    width: 450px !important; /* set to auto on mobile */
+    margin: auto !important;
+}
+
+.ck-home-email input {
+    height: 50px !important;
+}
+
+/* About Chris */
+
+.hosts-section .strong-400 {
+    display: none;
+}
+
+.hosts-section {
+    padding-bottom: 0px;
+}
+
+
+.hosts-section .testimonial-content .strong-600 {
+    display:none;
+}
+
+.hosts-section .testimonial-content .strong-500 {
+    font-size: 2.5rem !important;
+}
+
+/* Featured Eps */
+
+.featured-episodes-section {
+    padding-bottom: 1.5rem !important;
+    background-color: #F4F9F7;
+}
+
+/* Recent Eps */
+.excerpt {
+    display: none; /* Hide ep summary from card */
+}
+
+.card-body .mt-4 {
+    display: none; /* Remove Episode Page Link from Ep Cards */
+}
+
+/* All Episode Cards */
+
+.view-first:hover img { 
+    /* Reduce Zoom on Hover */
+    -webkit-transform: scale(1.03, 1.03) !important;
+    -moz-transform: scale(1.03, 1.03) !important;
+    -o-transform: scale(1.03, 1.03) !important;
+    -ms-transform: scale(1.03, 1.03) !important;
+    transform: scale(1.03, 1.03) !important;
+}
+
+.card {
+    border: 1px solid rgb(0,0,0,.1) !important;
+}
+
+/* Recent Blog */
+
+/* Host Section */
+
+
+/* Blog Post Page */
+
+#blog-post-list .block-image {
+    display: none;
+}
+
+/* section.blog-post img.w-100.rounded.ls-is-cached.lazyloaded { display: none; } */
+
+#blog-post-list .lead {
+    font-size: 1rem;
+}
+#blog-post-list .heading-2 {
+    font-size: 1.5rem !important;
+}
+#blog-post-list .content-publish-date {
+    font-size: 0.9rem;
+}
+#blog-post-list .mb-4 {
+    margin-bottom: 1rem !important;
+}
+.blog-post .btn-styled {
+    padding: 0.5rem 1.5rem;
+}
+
+/* Email Popup */
+.formkit-close {
+  right: 0px !important; 
+  color: #000 !important;
+}
+
+/* Advertiser Disclosure Modal */
+/* Advertiser Disclosure Modal */
+
+#modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #fff;
+  padding: 20px;
+  width: 400px;
+  display: none;
+  z-index: 1001;
+}
+
+#modal h2 {
+  margin-top: 0;
+}
+
+#close-modal {
+  margin-top: 20px;
+}
+
+#overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: none;
+  z-index: 1000;
+}
+
+/* Follow Page */
+.subscribe-page .container.d-flex.align-items-center {
+    padding-top: 60px;
+    padding-bottom: 60px;
+}
+.subscribe-page .align-items-center {
+    align-items: normal !important;
+}
+
+
+
+/* Tablet */
+
+@media only screen and (max-width: 991px) and (min-width: 768px) {
+    #homepage-header-title {
+        font-size: 60px !important;
+    }
+/*    .featured-episodes-section .swiper-container {
+    overflow: visible !important;
+    } */
+    .container {
+        padding-left: 0px !important;
+        padding-right: 0px !important;
+    }
+/*    .featured-episodes-section .swiper-slide {
+        width:200px !important;
+    } */
+    img.iearth {
+    transform: scale(0.75, 0.75) !important;
+    right: -260px !important;
+    bottom: -50px !important;
+    }
+    img.ipig {
+        transform: scale(0.75, 0.75) !important;
+        top: -110px !important;
+        left -110px !important;
+    }
+}
+
+/* Small Phone */
+@media only screen and (max-width: 576px) {
+    .hosts-section .col-md-3 {
+        flex: 0 0 60% !important;
+        max-width: 60% !important;
+        height: auto !important;
+    }
+}
+/* Phone */
+
+@media only screen and (max-width: 767px) {
+    .formkit-subheader {
+        margin-top: 0px !important;
+    }
+    .ck-home-email .formkit-subheader p {
+        max-width: 300px !important;
+    }
+
+    .hosts-section .col-md-3 {
+        flex: 0 0 40%;
+        max-width: 40%;
+        height: auto;
+    
+    }
+    .hosts-section .col-md-9 {
+        flex: 0 0 100%;
+        max-width: 100%;
+    }
+
+    #header-hero #c-text {
+        max-width: 90% !important;
+    }
+    #header-hero #c-text #homepage-header-title  {
+        font-size: 50px !important;
+    }
+    .ck-home-email .formkit-subheader h2 strong {
+        font-size: 40px !important;
+    }
+    a.podcast-youtube {
+    }
+    #header-hero #header-content-wrapper {
+        padding-bottom: 15px !important;
+    }
+    #homepage-header-description {
+        font-size: 16px !important;
+    }
+    .ck-home-email .formkit-subheader p {
+        font-size: 16px !important;
+    }
+    .custom-content-2-section .block-body {
+        margin-top: 0px !important;
+    }
+    .custom-content-2-section .container {
+        padding-left: 0px !important;
+        padding-right: 0px !important;
+    }
+    .ck-home-email h2 {
+        font-size: 1.1em !important;
+    }
+    /* .featured-episodes-section .swiper-container {
+        overflow: visible !important;
+    } */
+    .recent-blog-posts-section p {
+        font-size: 0.8em !important;
+    }
+    .reviews-section .pb-0 {
+        font-size: 16px !important;
+        /* width: 75% !important; */
+        /* margin: auto !important; */
+
+    }
+    .ck-home-email {
+        width: 95% !important;
+        padding-top: 10px !important;
+        padding-bottom: 30px !important;
+    }
+    .ck-home-email h2 {
+        font-size: 1.0em !important;
+    }
+    .ck-home-email p {
+        font-size: 0.8em !important;
+    }
+
+
+    img.iearth {
+        transform: scale(0.5, 0.5) !important;
+        right: -180px !important;
+        bottom: -160px !important;
+    }
+    img.ipig {
+        transform: scale(0.5, 0.5) !important;
+        top: -100px !important;
+        left -110px !important;
+    }
+    .home-trailer-box {
+        margin-top: -50px !important;
+    }
+
+    .home-trailer-box img.hide {
+        display: none !important;
+    }
+
+    .featured-reviews-section {
+        padding-bottom: 30px !important;
+    }
+
+    /* .featured-episodes-section .swiper-wrapper {
+        width: 900px;
+    }   */  
+
+    /* .featured-episodes-section .swiper-slide {
+        -webkit-flex-shrink: 1;
+        flex-shrink: 1;
+    } */
+}
+
+/* Tablet and Phone */
+@media screen and (max-width: 992px) {
+    .testimonial .testimonial-image {
+        border-radius: 100%;
+    }
+
+    .ck-home-email .formkit-subheader p {
+        width: auto !important; /* set to auto on mobile */
+    }
+
+    .ck-home-email .formkit-fields {
+        width: auto !important; /* set to auto on mobile */
+    }
+    
+    .testimonial-content {
+        position: static !important; /*mobilefix*/
+        padding-bottom: 20px !important;
+    }   
+    
+    #blog-post-list .col-lg-4 {
+        order: -1;
+    }
+    /* .blog-page-header {display: none;} */
+    #blog-post-list .formkit-subheader div {
+        display: none;
+    }
+    #blog-post-list .formkit-subheader h2 {
+        display: none;
+    }
+    #blog-post-list .formkit-header {
+        display: none;
+    }
+    #blog-post-list .sidebar-object {
+        display: none;
+    }
+    #blog-post-list {
+        padding-top: 0px !important;}
+    .blog-post .col-lg-4 {
+        order: -1;
+    }
+    .blog-post .formkit-subheader div {
+        display: none;
+    }
+    .blog-post .formkit-subheader p {
+        display: none;
+    }
+    .blog-post .sidebar-object {
+        display: none;
+    }
+    .blog-page-header {
+        padding-bottom: 0px !important;
+    }
+}
