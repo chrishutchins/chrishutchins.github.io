@@ -1,3 +1,7 @@
+        .hidden {
+            display: none;
+        }
+
 .blog-post .content-author {
     display: none !important;
 }
