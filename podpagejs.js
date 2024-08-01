@@ -2,10 +2,13 @@
         document.addEventListener("DOMContentLoaded", function() {
             var link = document.querySelector("a[href='https://www.chrishutchins.com/p/ccnav/']");
             if (link) {
-                link.innerHTML = link.innerHTML.replace('Credit Cards', 'All Cards');
+                link.childNodes.forEach(function(node) {
+                    if (node.nodeType === Node.TEXT_NODE && node.nodeValue.trim() === "Credit Cards") {
+                        node.nodeValue = "All Cards";
+                    }
+                });
             }
         });
-
 
 // Fix Review Separator
 
