@@ -1,11 +1,9 @@
 // Remove Credit Cards Link
         document.addEventListener("DOMContentLoaded", function() {
-            var links = document.querySelectorAll("a");
-            links.forEach(function(link) {
-                if (link.href === "https://www.chrishutchins.com/p/ccnav/") {
-                    link.classList.add("hidden");
-                }
-            });
+            var link = document.querySelector("a[href='https://www.chrishutchins.com/p/ccnav/']");
+            if (link) {
+                link.innerHTML = link.innerHTML.replace('Credit Cards', 'All Cards');
+            }
         });
 
 
