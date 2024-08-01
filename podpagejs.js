@@ -1,3 +1,12 @@
+// Remove Credit Cards Link
+        document.addEventListener("DOMContentLoaded", function() {
+            var link = document.querySelector("a[href='https://www.chrishutchins.com/p/ccnav/']");
+            if (link) {
+                link.classList.add("hidden");
+            }
+        });
+
+
 // Fix Review Separator
 
     document.addEventListener("DOMContentLoaded", function() {
