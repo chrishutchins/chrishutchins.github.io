@@ -1,5 +1,12 @@
 // Remove Credit Cards Link
         document.addEventListener("DOMContentLoaded", function() {
+            var link = document.querySelector("a.nav-link.m-0.dropdown-toggle[data-toggle='dropdown']");
+            if (link && link.textContent.trim() === "Credit Cards") {
+                link.textContent = "Credit-Cards";
+            }
+        });
+
+        document.addEventListener("DOMContentLoaded", function() {
             var link = document.querySelector("a[href='https://www.chrishutchins.com/p/ccnav/']");
             if (link) {
                 link.childNodes.forEach(function(node) {
