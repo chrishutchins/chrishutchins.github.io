@@ -17,7 +17,7 @@
 .testimonial-content {
     max-width: 500px !important;
     position: absolute !important; /* changed to static in mobile */
-    bottom: 50px !important;
+    bottom: 20px !important;
 }
 
 /* mobilefix */
@@ -316,7 +316,7 @@ display: none;
 .custom-content-1-section {
     /* margin-top: 40px; Replace with video in */
     padding-top: 0px;
-    padding-bottom: 0px; /* was 30px */
+    padding-bottom: 15px; /* was 30px */
 }
 
 img.ipig {
