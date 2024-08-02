@@ -73,7 +73,7 @@ document.addEventListener("DOMContentLoaded", function() {
     }
 
     // Find the target dropdown menu
-    var dropdownMenu = document.querySelector("#nav-custom-about .dropdown-menu .list-group");
+    var dropdownMenu = document.querySelector("#nav-custom-all-credit-cards .dropdown-menu .list-group");
 
     // Create a new list-group item
     var newListItem = document.createElement("a");
