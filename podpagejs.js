@@ -60,24 +60,61 @@ document.addEventListener("DOMContentLoaded", function() {
     });
 
 // Support Advertising Disclosure Modal
+document.addEventListener("DOMContentLoaded", function() {
+    // Define the showModal and hideModal functions
+    function showModal() {
+        document.getElementById("overlay").style.display = "block";
+        document.getElementById("modal").style.display = "block";
+    }
 
-const modalLink = document.getElementById('popup-link');
-const modalOverlay = document.getElementById('overlay');
-const modal = document.getElementById('modal');
-const closeModal = document.getElementById('close-modal');
+    function hideModal() {
+        document.getElementById("overlay").style.display = "none";
+        document.getElementById("modal").style.display = "none";
+    }
 
-modalLink.addEventListener('click', function(e) {
-  e.preventDefault();
-  modalOverlay.style.display = 'block';
-  modal.style.display = 'block';
-});
+    // Find the target dropdown menu
+    var dropdownMenu = document.querySelector("#nav-custom-about .dropdown-menu .list-group");
 
-closeModal.addEventListener('click', function() {
-  modalOverlay.style.display = 'none';
-  modal.style.display = 'none';
-});
+    // Create a new list-group item
+    var newListItem = document.createElement("a");
+    newListItem.href = "#";
+    newListItem.classList.add("list-group-item", "list-group-item-action", "d-flex", "new_window", "align-items-center", "justify-content-between");
+    newListItem.id = "popup-link-new"; // Assign a unique ID
+    newListItem.textContent = "Advertiser Disclosure";
 
-modalOverlay.addEventListener('click', function() {
-  modalOverlay.style.display = 'none';
-  modal.style.display = 'none';
+    // Append the new list item to the dropdown menu
+    dropdownMenu.appendChild(newListItem);
+
+    // Add event listener to the new list item to show the modal
+    newListItem.addEventListener("click", function(event) {
+        event.preventDefault();
+        showModal();
+    });
+
+    // Add event listener to the original popup link
+    var originalPopupLink = document.getElementById("popup-link");
+    if (originalPopupLink) {
+        originalPopupLink.addEventListener("click", function(event) {
+            event.preventDefault();
+            showModal();
+        });
+    }
+
+    // Add event listener to the close button
+    var closeModalButton = document.getElementById("close-modal");
+    if (closeModalButton) {
+        closeModalButton.addEventListener("click", function(event) {
+            event.preventDefault();
+            hideModal();
+        });
+    }
+
+    // Add event listener to the overlay to close the modal when clicked
+    var overlay = document.getElementById("overlay");
+    if (overlay) {
+        overlay.addEventListener("click", function(event) {
+            event.preventDefault();
+            hideModal();
+        });
+    }
 });
