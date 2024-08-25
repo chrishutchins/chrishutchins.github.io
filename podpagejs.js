@@ -6,6 +6,14 @@ function getUTMParameters() {
     
     // List of UTM parameters you want to capture
     let utmKeys = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_term', 'utm_content'];
+    
+    // Modify the utm_campaign to append ck_subscriber_id
+    if (urlParams.has('ck_subscriber_id') && urlParams.has('utm_campaign')) {
+        let subscriberId = urlParams.get('ck_subscriber_id');
+        let campaign = urlParams.get('utm_campaign');
+        let updatedCampaign = `${campaign} - ${subscriberId}`;
+        urlParams.set('utm_campaign', updatedCampaign);
+    }
 
     utmKeys.forEach(function(key) {
         if (urlParams.has(key)) {
