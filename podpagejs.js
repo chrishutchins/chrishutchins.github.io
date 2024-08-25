@@ -1,3 +1,41 @@
+// UTM Functions to get UTM parameters from URLs and append them to external links
+
+function getUTMParameters() {
+    let urlParams = new URLSearchParams(window.location.search);
+    let utmParams = [];
+    
+    // List of UTM parameters you want to capture
+    let utmKeys = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_term', 'utm_content'];
+
+    utmKeys.forEach(function(key) {
+        if (urlParams.has(key)) {
+            utmParams.push(key + '=' + urlParams.get(key));
+        }
+    });
+
+    return utmParams.join('&');
+}
+
+function appendUTMToLinks() {
+    let utmParameters = getUTMParameters();
+    if (utmParameters) {
+        document.querySelectorAll('a').forEach(function(anchor) {
+            let href = anchor.getAttribute('href');
+            // Check if the link is external (not pointing to the same domain)
+            if (href && !href.includes(window.location.hostname)) {
+                // Append the UTM parameters to the link
+                if (href.includes('?')) {
+                    href += '&' + utmParameters;
+                } else {
+                    href += '?' + utmParameters;
+                }
+                anchor.setAttribute('href', href);
+            }
+        });
+    }
+}
+window.addEventListener('load', appendUTMToLinks);
+
 // Fix Review Separator
 
     document.addEventListener("DOMContentLoaded", function() {
