@@ -25,6 +25,12 @@ document.addEventListener("DOMContentLoaded", function() {
         }
     });
 
+// Remove Products from Nav
+document.querySelectorAll('a.list-group-item').forEach(function(anchor) {
+    if (anchor.textContent.trim() === "Products") {
+        anchor.remove();
+    }
+});
 // Change Transcript to Member Content
 
     document.addEventListener("DOMContentLoaded", function() {
