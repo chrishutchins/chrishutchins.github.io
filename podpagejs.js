@@ -2,39 +2,45 @@
 
 function getUTMParameters() {
     let urlParams = new URLSearchParams(window.location.search);
-    let utmParams = [];
+    let utmParams = new URLSearchParams();
     
     // List of UTM parameters you want to capture
     let utmKeys = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_term', 'utm_content'];
 
     utmKeys.forEach(function(key) {
         if (urlParams.has(key)) {
-            utmParams.push(key + '=' + urlParams.get(key));
+            utmParams.set(key, urlParams.get(key));
         }
     });
 
-    return utmParams.join('&');
+    return utmParams;
 }
 
+// Function to append UTM parameters to external links
 function appendUTMToLinks() {
     let utmParameters = getUTMParameters();
-    if (utmParameters) {
+    if (utmParameters.toString()) {
         document.querySelectorAll('a').forEach(function(anchor) {
             let href = anchor.getAttribute('href');
-            // Check if the link is external (not pointing to the same domain)
             if (href && !href.includes(window.location.hostname)) {
-                // Append the UTM parameters to the link
-                if (href.includes('?')) {
-                    href += '&' + utmParameters;
-                } else {
-                    href += '?' + utmParameters;
-                }
-                anchor.setAttribute('href', href);
+                let linkParams = new URLSearchParams(href.split('?')[1]);
+                
+                // Only append UTM parameters that are not already present
+                utmParameters.forEach((value, key) => {
+                    if (!linkParams.has(key)) {
+                        linkParams.append(key, value);
+                    }
+                });
+
+                anchor.setAttribute('href', href.split('?')[0] + '?' + linkParams.toString());
             }
         });
     }
 }
+
+// Run the function on page load
 window.addEventListener('load', appendUTMToLinks);
+
 
 // Fix Review Separator
 
