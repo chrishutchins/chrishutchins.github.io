@@ -10,9 +10,9 @@ function getUTMParameters() {
     // Modify the utm_campaign to append ck_subscriber_id
     if (urlParams.has('ck_subscriber_id') && urlParams.has('utm_campaign')) {
         let subscriberId = urlParams.get('ck_subscriber_id');
-        let campaign = urlParams.get('utm_campaign');
+        let campaign = decodeURIComponent(urlParams.get('utm_campaign')); // Decode first to prevent double encoding
         let updatedCampaign = `${campaign} - ${subscriberId}`;
-        urlParams.set('utm_campaign', encodeURIComponent(updatedCampaign));
+        urlParams.set('utm_campaign', encodeURIComponent(updatedCampaign)); // Then encode
     }
 
     utmKeys.forEach(function(key) {
