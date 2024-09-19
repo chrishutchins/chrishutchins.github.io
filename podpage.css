@@ -749,7 +749,7 @@ img.iearth {
 /* Web */
 @media screen and (min-width: 993px) {
     .hosts-section img {
-        max-height: 450px;
+        max-height: 266.5px;
         width: auto !important;
         float: right;
     }
