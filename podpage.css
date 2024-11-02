@@ -105,7 +105,7 @@
     color: white !important; /* Keep color the same on hover */
 }
 
-.testimonial-content .mb-2 {
+.testimonial-content .mb-2 > p {
     color: #BAC7C1 !important;
 }
 
