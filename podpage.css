@@ -24,6 +24,10 @@
     bottom: 20px !important;
 }
 
+.testimonial-content h4, .heading-4 {
+        line-height: 42px !important;
+}
+
 /* mobilefix */
 
 .ck-home-email {
