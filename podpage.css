@@ -267,7 +267,7 @@ display: none;
 .featured-reviews-section .section-title {
     display: none;
 }
-.text-lg.line-height-1_8.strong-300 {
+p.text-lg.line-height-1_8.strong-300 {
     display: none;
 }
 .featured-reviews-section a {
