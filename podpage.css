@@ -139,11 +139,14 @@
     font-weight: 500;
     margin-bottom: 12px;
     border: 1px solid rgba(26,67,49,0.15);
-    text-align: center;
+    text-align: center !important;
 }
+
+.
 
 #header-hero #c-text #homepage-header-title {
     line-height: 1.1 !important;
+    text-align: center !important;
 }
 
 #header-hero #c-text {
