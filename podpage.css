@@ -428,8 +428,13 @@ img.iearth {
 }
 
 #hosts-section p {	
-		    color: white !important;
+    color: white !important;
 }
+
+.hosts-section p {	
+    color: white !important;
+}
+
 
 .hosts-section {
     padding-bottom: 0px;
