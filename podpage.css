@@ -275,7 +275,7 @@ display: none;
 .featured-reviews-section .section-title {
     display: none;
 }
-p.text-lg.line-height-1_8.strong-300 {
+p.text-lg.strong-300 {
     display: none;
 }
 .featured-reviews-section a {
@@ -425,6 +425,10 @@ img.iearth {
 
 .hosts-section .strong-400 {
     display: none;
+}
+
+#hosts-section p {	
+		    color: white !important;
 }
 
 .hosts-section {
