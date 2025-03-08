@@ -142,7 +142,6 @@
     text-align: center !important;
 }
 
-.
 
 #header-hero #c-text #homepage-header-title {
     line-height: 1.1 !important;
@@ -427,11 +426,11 @@ img.iearth {
     display: none;
 }
 
-#hosts-section p {	
+#hosts-section .bio p {	
     color: white !important;
 }
 
-.hosts-section p {	
+.hosts-section .bio p {	
     color: white !important;
 }
 
