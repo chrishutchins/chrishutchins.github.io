@@ -426,14 +426,9 @@ img.iearth {
     display: none;
 }
 
-#hosts-section .bio p {	
+.bio p {	
     color: white !important;
 }
-
-.hosts-section .bio p {	
-    color: white !important;
-}
-
 
 .hosts-section {
     padding-bottom: 0px;
