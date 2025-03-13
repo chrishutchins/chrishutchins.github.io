@@ -271,16 +271,16 @@ display: none;
 
 /* Featured Reviews */
 
-#featured-reviews-section .section-title {
+#reviews-section .section-title {
     display: none;
 }
 p.text-lg.strong-300 {
     display: none;
 }
-#featured-reviews-section a {
+#reviews-section a {
     color: #1A4331;
 }
-#featured-reviews-section .btn-styled {
+#reviews-section .btn-styled {
     display: none;
 }
 #featured-reviews-section .strong-500 {
@@ -289,13 +289,13 @@ p.text-lg.strong-300 {
     color: #1A4331;
 }
 
-#featured-reviews-section .mt-3 {
+#reviews-section .mt-3 {
     margin-top: 0px !important; 
 }
-#featured-reviews-section .heading-xs {
+#reviews-section .heading-xs {
     color: #808080;
 }
-#featured-reviews-section {
+#reviews-section {
     border: none !important;
     background-color: #fff;
     padding-top: 0px;
