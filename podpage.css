@@ -6,7 +6,7 @@
     display: none !important;
 }
 
-.recent-blog-posts-section .card-body > div:first-of-type {
+#recent-blog-posts-section .card-body > div:first-of-type {
     display: none !important;
 }
 
@@ -38,18 +38,18 @@
 }
 
 /* next 2 changed on mobile*/
-.hosts-section .col-md-3 {
+#hosts-section .col-md-3 {
     flex: 0 0 43%;
     max-width: 43%;
     height: auto;
 
 }
-.hosts-section .col-md-9 {
+#hosts-section .col-md-9 {
     flex: 0 0 57%;
     max-width: 57%;
 }
 
-.custom-content-1-section::before {
+#custom-content-1-section::before {
     content: '';
     position: absolute;
     top: 0;
@@ -61,7 +61,7 @@
     z-index: 0;
 }
 
-.hosts-section::before {
+#hosts-section::before {
     content: '';
     position: absolute;
     top: 0;
@@ -77,20 +77,20 @@
     background: none !important;
 }
 
-.hosts-section .container {
+#hosts-section .container {
     max-width: 85% !important;
 }
 
-.hosts-section .mb-4 {
+#hosts-section .mb-4 {
     margin-bottom: 0 !important;
 }
 
-.hosts-section .mb-3 {
+#hosts-section .mb-3 {
     margin-bottom: 0 !important;
 }
 
 
-.hosts-section {
+#hosts-section {
     padding-top: 0px !important;
 }
 
@@ -167,7 +167,7 @@ display: none;
     margin-top: 24px;
 }
 
-.custom-content-2-section {
+#custom-content-2-section {
     margin-top: 0;
     padding-top: 0px;
     padding-bottom: 0px;
@@ -271,31 +271,31 @@ display: none;
 
 /* Featured Reviews */
 
-.featured-reviews-section .section-title {
+#featured-reviews-section .section-title {
     display: none;
 }
 p.text-lg.strong-300 {
     display: none;
 }
-.featured-reviews-section a {
+#featured-reviews-section a {
     color: #1A4331;
 }
-.featured-reviews-section .btn-styled {
+#featured-reviews-section .btn-styled {
     display: none;
 }
-.featured-reviews-section .strong-500 {
+#featured-reviews-section .strong-500 {
     font-weight: 500 !important;
     margin-top: 10px;
     color: #1A4331;
 }
 
-.featured-reviews-section .mt-3 {
+#featured-reviews-section .mt-3 {
     margin-top: 0px !important; 
 }
-.featured-reviews-section .heading-xs {
+#featured-reviews-section .heading-xs {
     color: #808080;
 }
-.featured-reviews-section {
+#featured-reviews-section {
     border: none !important;
     background-color: #fff;
     padding-top: 0px;
@@ -318,7 +318,7 @@ p.text-lg.strong-300 {
 
 /* Video */
 
-.custom-content-1-section {
+#custom-content-1-section {
     /* margin-top: 40px; Replace with video in */
     padding-top: 0px;
     padding-bottom: 15px; /* was 30px */
@@ -422,30 +422,30 @@ img.iearth {
 
 /* About Chris */
 
-.hosts-section .strong-400 {
+#hosts-section .strong-400 {
     display: none;
 }
 
-.bio p {	
-    color: #ffffff !important;
+.bio p {	
+    color: #ffffff !important;
 }
 
-.hosts-section {
+#hosts-section {
     padding-bottom: 0px;
 }
 
 
-.hosts-section .testimonial-content .strong-600 {
+#hosts-section .testimonial-content .strong-600 {
     display:none;
 }
 
-.hosts-section .testimonial-content .strong-500 {
+#hosts-section .testimonial-content .strong-500 {
     font-size: 2.5rem !important;
 }
 
 /* Featured Eps */
 
-.featured-episodes-section {
+#featured-episodes-section {
     padding-bottom: 1.5rem !important;
     background-color: #F4F9F7;
 }
@@ -560,14 +560,14 @@ img.iearth {
     #homepage-header-title {
         font-size: 60px !important;
     }
-/*    .featured-episodes-section .swiper-container {
+/*    #featured-episodes-section .swiper-container {
     overflow: visible !important;
     } */
     .container {
         padding-left: 0px !important;
         padding-right: 0px !important;
     }
-/*    .featured-episodes-section .swiper-slide {
+/*    #featured-episodes-section .swiper-slide {
         width:200px !important;
     } */
     img.iearth {
@@ -584,7 +584,7 @@ img.iearth {
 
 /* Small Phone */
 @media only screen and (max-width: 576px) {
-    .hosts-section .col-md-3 {
+    #hosts-section .col-md-3 {
         flex: 0 0 60% !important;
         max-width: 60% !important;
         height: auto !important;
@@ -601,13 +601,13 @@ img.iearth {
         max-width: 300px !important;
     }
 
-    .hosts-section .col-md-3 {
+    #hosts-section .col-md-3 {
         flex: 0 0 40%;
         max-width: 40%;
         height: auto;
     
     }
-    .hosts-section .col-md-9 {
+    #hosts-section .col-md-9 {
         flex: 0 0 100%;
         max-width: 100%;
     }
@@ -632,10 +632,10 @@ img.iearth {
     .ck-home-email .formkit-subheader p {
         font-size: 16px !important;
     }
-    .custom-content-2-section .block-body {
+    #custom-content-2-section .block-body {
         margin-top: 0px !important;
     }
-    .custom-content-2-section .container {
+    #custom-content-2-section .container {
         padding-left: 0px !important;
         padding-right: 0px !important;
     }
@@ -645,10 +645,10 @@ img.iearth {
     /* .featured-episodes-section .swiper-container {
         overflow: visible !important;
     } */
-    .recent-blog-posts-section p {
+    #recent-blog-posts-section p {
         font-size: 0.8em !important;
     }
-    .reviews-section .pb-0 {
+    #reviews-section .pb-0 {
         font-size: 16px !important;
         /* width: 75% !important; */
         /* margin: auto !important; */
@@ -685,15 +685,15 @@ img.iearth {
         display: none !important;
     }
 
-    .featured-reviews-section {
+    #featured-reviews-section {
         padding-bottom: 30px !important;
     }
 
-    /* .featured-episodes-section .swiper-wrapper {
+    /* #featured-episodes-section .swiper-wrapper {
         width: 900px;
     }   */  
 
-    /* .featured-episodes-section .swiper-slide {
+    /* #featured-episodes-section .swiper-slide {
         -webkit-flex-shrink: 1;
         flex-shrink: 1;
     } */
@@ -705,7 +705,7 @@ img.iearth {
         border-radius: 100% !important;
     }
 
-    .hosts-section img {
+    #hosts-section img {
         max-height: 450px;
         float: right;
     }
@@ -759,7 +759,7 @@ img.iearth {
 }
 /* Web */
 @media screen and (min-width: 993px) {
-    .hosts-section img {
+    #hosts-section img {
         max-height: 266.5px;
         width: auto !important;
         float: right;
