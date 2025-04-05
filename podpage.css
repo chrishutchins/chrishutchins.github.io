@@ -723,9 +723,9 @@ img.iearth {
         padding-bottom: 20px !important;
     }   
     
-    #blog-post-list .col-lg-4 {
+    /* #blog-post-list .col-lg-4 {
         order: -1;
-    }
+    } */
     /* .blog-page-header {display: none;} */
     #blog-post-list .formkit-subheader div {
         display: none;
