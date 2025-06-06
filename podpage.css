@@ -594,6 +594,12 @@ img.iearth {
 /* Phone */
 
 @media only screen and (max-width: 767px) {
+    section.slice.subscribe-page {
+        padding-top: 0 !important;
+    }
+    #header-hero #header-content-wrapper {
+        padding-top: 0 !important;
+    }
     .formkit-subheader {
         margin-top: 0px !important;
     }
