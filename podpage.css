@@ -395,8 +395,9 @@ img.iearth {
 }
 
 .ck-home-email .formkit-subheader h2 strong {
+    color: #fffff !important;
     font-weight: 300;
-    font-size: 58px; /* 1.8em; */
+    font-size: 52px; /* 1.8em; */
     line-height: 1;
 }
 
@@ -406,7 +407,7 @@ img.iearth {
 
 .ck-home-email .formkit-subheader p {
     color: #BAC7C1 !important;
-    font-size: 22px !important;
+    font-size: 18px !important;
     max-width: 450px !important; /* set to auto on mobile */
     margin: auto !important;
 }
