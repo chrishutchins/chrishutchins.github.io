@@ -17,6 +17,9 @@
 .ck-home-email .formkit-header {
     display: none !important; 
 }
+.slice {
+    padding-top: 2rem;
+}
 
 .testimonial-content {
     max-width: 500px !important;
