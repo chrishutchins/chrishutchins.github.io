@@ -1,53 +1,62 @@
-// UTM Functions to get UTM parameters from URLs and append them to external links
-
-function getUTMParameters() {
+// UTM + S1-S5 Functions to get parameters from URLs and append them to external links
+function getTrackingParameters() {
     let urlParams = new URLSearchParams(window.location.search);
-    let utmParams = new URLSearchParams();
+    let trackingParams = new URLSearchParams();
     
-    // List of UTM parameters you want to capture
-    let utmKeys = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_term', 'utm_content'];
+    // List of parameters you want to capture
+    let keys = [
+        'utm_source', 'utm_medium', 'utm_campaign', 'utm_term', 'utm_content',
+        's1', 's2', 's3', 's4', 's5'
+    ];
 
     // Modify the utm_campaign to append ck_subscriber_id
     if (urlParams.has('ck_subscriber_id') && urlParams.has('utm_campaign')) {
         let subscriberId = urlParams.get('ck_subscriber_id');
-        let campaign = decodeURIComponent(urlParams.get('utm_campaign')); // Decode first to prevent double encoding
+        let campaign = decodeURIComponent(urlParams.get('utm_campaign')); // Decode first
         let updatedCampaign = `${campaign} - ${subscriberId}`;
-        urlParams.set('utm_campaign', encodeURIComponent(updatedCampaign)); // Then encode
+        urlParams.set('utm_campaign', encodeURIComponent(updatedCampaign)); // Encode once
     }
 
-    utmKeys.forEach(function(key) {
+    keys.forEach(function(key) {
         if (urlParams.has(key)) {
-            utmParams.set(key, urlParams.get(key));
+            trackingParams.set(key, urlParams.get(key));
         }
     });
 
-    return utmParams;
+    // Always append ck_subscriber_id into s5 if available
+    if (urlParams.has('ck_subscriber_id')) {
+        trackingParams.set('s5', urlParams.get('ck_subscriber_id'));
+    }
+
+    return trackingParams;
 }
 
-// Function to append UTM parameters to external links
-function appendUTMToLinks() {
-    let utmParameters = getUTMParameters();
-    if (utmParameters.toString()) {
+// Function to append tracking parameters to external links
+function appendTrackingToLinks() {
+    let trackingParameters = getTrackingParameters();
+    if (trackingParameters.toString()) {
         document.querySelectorAll('a').forEach(function(anchor) {
             let href = anchor.getAttribute('href');
             if (href && !href.includes(window.location.hostname)) {
-                let linkParams = new URLSearchParams(href.split('?')[1]);
+                let parts = href.split('?');
+                let linkParams = new URLSearchParams(parts[1] || '');
                 
-                // Only append UTM parameters that are not already present
-                utmParameters.forEach((value, key) => {
+                // Only append parameters that are not already present
+                trackingParameters.forEach((value, key) => {
                     if (!linkParams.has(key)) {
                         linkParams.append(key, value);
                     }
                 });
 
-                anchor.setAttribute('href', href.split('?')[0] + '?' + linkParams.toString());
+                anchor.setAttribute('href', parts[0] + '?' + linkParams.toString());
             }
         });
     }
 }
 
 // Run the function on page load
-window.addEventListener('load', appendUTMToLinks);
+window.addEventListener('load', appendTrackingToLinks);
+
 
 
 // Fix Review Separator
