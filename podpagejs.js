@@ -1,20 +1,19 @@
-// UTM + S1-S5 Functions to get parameters from URLs and append them to external links
 function getTrackingParameters() {
     let urlParams = new URLSearchParams(window.location.search);
     let trackingParams = new URLSearchParams();
     
-    // List of parameters you want to capture
+    // List of parameters to capture
     let keys = [
         'utm_source', 'utm_medium', 'utm_campaign', 'utm_term', 'utm_content',
         's1', 's2', 's3', 's4', 's5'
     ];
 
-    // Modify the utm_campaign to append ck_subscriber_id
+    // Modify utm_campaign to append ck_subscriber_id
     if (urlParams.has('ck_subscriber_id') && urlParams.has('utm_campaign')) {
         let subscriberId = urlParams.get('ck_subscriber_id');
-        let campaign = decodeURIComponent(urlParams.get('utm_campaign')); // Decode first
+        let campaign = decodeURIComponent(urlParams.get('utm_campaign'));
         let updatedCampaign = `${campaign} - ${subscriberId}`;
-        urlParams.set('utm_campaign', encodeURIComponent(updatedCampaign)); // Encode once
+        urlParams.set('utm_campaign', encodeURIComponent(updatedCampaign));
     }
 
     keys.forEach(function(key) {
@@ -23,7 +22,7 @@ function getTrackingParameters() {
         }
     });
 
-    // Always append ck_subscriber_id into s5 if available
+    // Force ck_subscriber_id into s5 if present
     if (urlParams.has('ck_subscriber_id')) {
         trackingParams.set('s5', urlParams.get('ck_subscriber_id'));
     }
@@ -31,31 +30,28 @@ function getTrackingParameters() {
     return trackingParams;
 }
 
-// Function to append tracking parameters to external links
 function appendTrackingToLinks() {
     let trackingParameters = getTrackingParameters();
     if (trackingParameters.toString()) {
         document.querySelectorAll('a').forEach(function(anchor) {
             let href = anchor.getAttribute('href');
             if (href && !href.includes(window.location.hostname)) {
-                let parts = href.split('?');
-                let linkParams = new URLSearchParams(parts[1] || '');
+                let [baseUrl, queryString] = href.split('?');
+                let linkParams = new URLSearchParams(queryString || '');
                 
-                // Only append parameters that are not already present
+                // Always set/overwrite tracking params
                 trackingParameters.forEach((value, key) => {
-                    if (!linkParams.has(key)) {
-                        linkParams.append(key, value);
-                    }
+                    linkParams.set(key, value);
                 });
 
-                anchor.setAttribute('href', parts[0] + '?' + linkParams.toString());
+                anchor.setAttribute('href', baseUrl + '?' + linkParams.toString());
             }
         });
     }
 }
 
-// Run the function on page load
 window.addEventListener('load', appendTrackingToLinks);
+
 
 
 
