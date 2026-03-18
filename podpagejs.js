@@ -1,57 +1,76 @@
 function getTrackingParameters() {
-    let urlParams = new URLSearchParams(window.location.search);
-    let trackingParams = new URLSearchParams();
-    
-    // List of parameters to capture
-    let keys = [
-        'utm_source', 'utm_medium', 'utm_campaign', 'utm_term', 'utm_content',
-        's1', 's2', 's3', 's4', 's5'
-    ];
+  var urlParams = new URLSearchParams(window.location.search);
+  var trackingParams = new URLSearchParams();
 
-    // Build utm_content with ck_subscriber_id always included
-    let ckSub = urlParams.get('ck_subscriber_id');
-    let rawContent = urlParams.get('utm_content');
-    if (ckSub) {
-        let utmContent = rawContent ? `ck:${ckSub}|${rawContent}` : `ck:${ckSub}`;
-        urlParams.set('utm_content', utmContent);
+  // Build utm_content with ck_subscriber_id prepended:
+  //   no utm_content + ck_sub → "ck:123"
+  //   utm_content + ck_sub   → "ck:123|original_content"
+  //   utm_content, no ck_sub → "original_content"
+  var ckSub = urlParams.get('ck_subscriber_id');
+  var rawContent = urlParams.get('utm_content');
+  if (ckSub) {
+    var utmContent = rawContent ? 'ck:' + ckSub + '|' + rawContent : 'ck:' + ckSub;
+    urlParams.set('utm_content', utmContent);
+  }
 
-    keys.forEach(function(key) {
-        if (urlParams.has(key)) {
-            trackingParams.set(key, urlParams.get(key));
-        }
-    });
+  // UTMs + s1-s5 sub-IDs
+  var keys = [
+    'utm_source', 'utm_medium', 'utm_campaign', 'utm_term', 'utm_content',
+    's1', 's2', 's3', 's4', 's5'
+  ];
 
-    // Force ck_subscriber_id into s5 if present
-    if (ckSub) {
-        trackingParams.set('s5', ckSub);
-        // Pass through so /c middleware can also use it
-        trackingParams.set('ck_subscriber_id', ckSub);
+  keys.forEach(function (key) {
+    if (urlParams.has(key)) {
+      trackingParams.set(key, urlParams.get(key));
     }
-        
-    return trackingParams;
+  });
+
+  // Map ck_subscriber_id → s5 and pass it through as a named param
+  if (ckSub) {
+    trackingParams.set('s5', ckSub);
+    trackingParams.set('ck_subscriber_id', ckSub);
+  }
+
+  return trackingParams;
 }
 
 function appendTrackingToLinks() {
-    let trackingParameters = getTrackingParameters();
-    if (trackingParameters.toString()) {
-        document.querySelectorAll('a').forEach(function(anchor) {
-            let href = anchor.getAttribute('href');
-            if (href && !href.includes(window.location.hostname)) {
-                let [baseUrl, queryString] = href.split('?');
-                let linkParams = new URLSearchParams(queryString || '');
-                
-                // Always set/overwrite tracking params
-                trackingParameters.forEach((value, key) => {
-                    linkParams.set(key, value);
-                });
+  var trackingParameters = getTrackingParameters();
+  if (!trackingParameters.toString()) return;
 
-                anchor.setAttribute('href', baseUrl + '?' + linkParams.toString());
-            }
-        });
+  document.querySelectorAll('a').forEach(function (anchor) {
+    var href = anchor.getAttribute('href');
+    if (!href || href.startsWith('#') || href.startsWith('mailto:') || href.startsWith('tel:')) return;
+
+    try {
+      var url = new URL(href, window.location.origin);
+
+      // Don't touch anchors pointing to javascript: or blob: etc.
+      if (url.protocol !== 'http:' && url.protocol !== 'https:') return;
+
+      trackingParameters.forEach(function (value, key) {
+        if (!url.searchParams.has(key)) {
+          url.searchParams.set(key, value);
+        }
+      });
+
+      anchor.setAttribute('href', url.toString());
+    } catch (e) {
+      // Skip malformed URLs
     }
+  });
 }
 
+// Run as soon as possible, again on full load, and watch for dynamic content
+appendTrackingToLinks();
 window.addEventListener('load', appendTrackingToLinks);
+
+var debounceTimer;
+new MutationObserver(function () {
+  clearTimeout(debounceTimer);
+  debounceTimer = setTimeout(appendTrackingToLinks, 100);
+}).observe(document.body, { childList: true, subtree: true });
+
 
 
 
