@@ -8,13 +8,12 @@ function getTrackingParameters() {
         's1', 's2', 's3', 's4', 's5'
     ];
 
-    // Modify utm_campaign to append ck_subscriber_id
-    if (urlParams.has('ck_subscriber_id') && urlParams.has('utm_campaign')) {
-        let subscriberId = urlParams.get('ck_subscriber_id');
-        let campaign = decodeURIComponent(urlParams.get('utm_campaign'));
-        let updatedCampaign = `${campaign} - ${subscriberId}`;
-        urlParams.set('utm_campaign', encodeURIComponent(updatedCampaign));
-    }
+    // Build utm_content with ck_subscriber_id always included
+    let ckSub = urlParams.get('ck_subscriber_id');
+    let rawContent = urlParams.get('utm_content');
+    if (ckSub) {
+        let utmContent = rawContent ? `ck:${ckSub}|${rawContent}` : `ck:${ckSub}`;
+        urlParams.set('utm_content', utmContent);
 
     keys.forEach(function(key) {
         if (urlParams.has(key)) {
@@ -23,10 +22,12 @@ function getTrackingParameters() {
     });
 
     // Force ck_subscriber_id into s5 if present
-    if (urlParams.has('ck_subscriber_id')) {
-        trackingParams.set('s5', urlParams.get('ck_subscriber_id'));
+    if (ckSub) {
+        trackingParams.set('s5', ckSub);
+        // Pass through so /c middleware can also use it
+        trackingParams.set('ck_subscriber_id', ckSub);
     }
-
+        
     return trackingParams;
 }
 
